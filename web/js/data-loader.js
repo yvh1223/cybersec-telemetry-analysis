@@ -35,51 +35,6 @@ class DataLoader {
         }
     }
 
-    async loadProcessedTelemetry() {
-        try {
-            const response = await fetch(this.baseDataPath + 'telemetry_processed.json');
-            if (!response.ok) {
-                throw new Error('Failed to load processed telemetry');
-            }
-            const data = await response.json();
-            this.cachedData.telemetry = data;
-            return data;
-        } catch (error) {
-            console.warn('Could not load processed telemetry:', error);
-            return this.getMockTelemetryData();
-        }
-    }
-
-    async loadDailyMetrics() {
-        try {
-            const response = await fetch(this.baseDataPath + 'daily_metrics.json');
-            if (!response.ok) {
-                throw new Error('Failed to load daily metrics');
-            }
-            const data = await response.json();
-            this.cachedData.dailyMetrics = data;
-            return data;
-        } catch (error) {
-            console.warn('Could not load daily metrics:', error);
-            return this.getMockDailyMetrics();
-        }
-    }
-
-    async loadThreatAnalysis() {
-        try {
-            const response = await fetch(this.baseDataPath + 'threat_analysis.json');
-            if (!response.ok) {
-                throw new Error('Failed to load threat analysis');
-            }
-            const data = await response.json();
-            this.cachedData.threatAnalysis = data;
-            return data;
-        } catch (error) {
-            console.warn('Could not load threat analysis:', error);
-            return this.getMockThreatAnalysis();
-        }
-    }
-
     getMockInsights() {
         return {
             overview: {
@@ -132,61 +87,6 @@ class DataLoader {
                 executive_summary: "Cybersecurity telemetry analysis reveals critical areas requiring immediate attention. While threat detection effectiveness is high at 94.2%, elevated false positive rates and system performance impact are significantly affecting user productivity.",
                 generated_at: new Date().toISOString()
             }
-        };
-    }
-
-    getMockTelemetryData() {
-        return Array.from({ length: 100 }, (_, i) => ({
-            event_id: `event_${i}`,
-            timestamp: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
-            endpoint_id: `endpoint_${Math.floor(Math.random() * 1000)}`,
-            event_type: ['scan', 'threat_detection', 'performance', 'user_feedback'][Math.floor(Math.random() * 4)],
-            threat_type: ['malware', 'virus', 'trojan', 'spyware'][Math.floor(Math.random() * 4)],
-            severity: ['low', 'medium', 'high', 'critical'][Math.floor(Math.random() * 4)]
-        }));
-    }
-
-    getMockDailyMetrics() {
-        return Array.from({ length: 7 }, (_, i) => {
-            const date = new Date();
-            date.setDate(date.getDate() - i);
-            return {
-                timestamp: date.toISOString().split('T')[0],
-                total_events: Math.floor(Math.random() * 10000) + 40000,
-                active_endpoints: Math.floor(Math.random() * 5000) + 45000,
-                cpu_usage_avg: Math.random() * 30 + 20,
-                memory_usage_mb: Math.random() * 500 + 1000
-            };
-        });
-    }
-
-    getMockThreatAnalysis() {
-        return [
-            { threat_type: 'malware', severity: 'high', threat_count: 4500, false_positive: 320 },
-            { threat_type: 'virus', severity: 'medium', threat_count: 3200, false_positive: 180 },
-            { threat_type: 'trojan', severity: 'critical', threat_count: 2800, false_positive: 95 },
-            { threat_type: 'spyware', severity: 'medium', threat_count: 1800, false_positive: 240 },
-            { threat_type: 'ransomware', severity: 'critical', threat_count: 158, false_positive: 8 }
-        ];
-    }
-
-    async loadAllData() {
-        console.log('Loading all dashboard data...');
-        
-        const [insights, aiAnalysis, telemetry, dailyMetrics, threatAnalysis] = await Promise.all([
-            this.loadInsightsSummary(),
-            this.loadAIAnalysis(),
-            this.loadProcessedTelemetry(),
-            this.loadDailyMetrics(),
-            this.loadThreatAnalysis()
-        ]);
-
-        return {
-            insights,
-            aiAnalysis,
-            telemetry,
-            dailyMetrics,
-            threatAnalysis
         };
     }
 
