@@ -8,7 +8,7 @@ A comprehensive data analysis platform demonstrating cybersecurity telemetry pro
 
 ## 🎯 Project Overview
 
-This project showcases end-to-end data analysis skills through a realistic cybersecurity telemetry analysis scenario. It demonstrates data extraction, processing, AI-powered analysis, and professional dashboard creation suitable for enterprise cybersecurity operations.
+This project showcases end-to-end data analysis skills through a realistic cybersecurity telemetry analysis scenario. It demonstrates data extraction, processing, AI-powered analysis, and professional dashboard creation suitable for enterprise cybersecurity operations with a focus on **customer experience optimization**.
 
 ### Key Features
 
@@ -18,6 +18,7 @@ This project showcases end-to-end data analysis skills through a realistic cyber
 - **📈 Interactive Dashboard**: Professional web-based visualization
 - **⚡ Performance Metrics**: System impact and user experience analysis
 - **🚨 Threat Intelligence**: Advanced threat pattern recognition
+- **👤 Customer Experience**: User satisfaction tracking and improvement analytics
 
 ## 🛠️ Technology Stack
 
@@ -293,9 +294,9 @@ This project is open source and available under the MIT License.
 
 ## 👤 Author
 
-**Yashas Huchchannavar**
+**Yallappa Huchchannavar**
 - GitHub: [@yvh1223](https://github.com/yvh1223)
-- LinkedIn: [Connect with me](https://linkedin.com/in/yashas-huchchannavar)
+- LinkedIn: [Connect with me](https://www.linkedin.com/in/yallappa/)
 - Portfolio: [View Projects](https://yvh1223.github.io)
 
 ## 🙏 Acknowledgments
@@ -306,4 +307,4 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Built for showcasing data analysis and AI integration skills in cybersecurity domain.**
+**Built for showcasing data analysis and AI integration skills in cybersecurity domain with focus on customer experience optimization.**
