@@ -2,6 +2,10 @@
 
 A comprehensive data analysis platform demonstrating cybersecurity telemetry processing, AI-powered insights, and interactive visualization capabilities.
 
+## 🌐 Live Demo
+
+**🔗 [View Live Dashboard](https://yvh1223.github.io/cybersec-telemetry-analysis/web/)**
+
 ## 🎯 Project Overview
 
 This project showcases end-to-end data analysis skills through a realistic cybersecurity telemetry analysis scenario. It demonstrates data extraction, processing, AI-powered analysis, and professional dashboard creation suitable for enterprise cybersecurity operations.
@@ -44,7 +48,7 @@ export OPENAI_API_KEY="your-api-key-here"
 
 ### 1. Clone and Setup
 ```bash
-git clone <repository-url>
+git clone https://github.com/yvh1223/cybersec-telemetry-analysis.git
 cd cybersec-telemetry-analysis
 ```
 
@@ -69,6 +73,9 @@ open web/index.html
 cd web
 python -m http.server 8000
 # Visit: http://localhost:8000
+
+# Option 3: Live Demo
+# https://yvh1223.github.io/cybersec-telemetry-analysis/web/
 ```
 
 ## 📁 Project Structure
@@ -88,7 +95,8 @@ cybersec-telemetry-analysis/
 │   ├── css/
 │   │   └── dashboard.css   # Styling
 │   └── js/
-│       └── dashboard.js    # Interactive functionality
+│       ├── dashboard.js    # Interactive functionality
+│       └── data-loader.js  # Data loading utilities
 ├── config/
 │   └── config.yaml         # Configuration settings
 ├── main.py                 # Pipeline orchestrator
@@ -225,19 +233,6 @@ python main.py --generate-only
 python main.py --demo
 ```
 
-## 🌐 Deployment Options
-
-### GitHub Pages
-1. Upload to GitHub repository
-2. Enable GitHub Pages in settings
-3. Access via: `https://username.github.io/repo-name`
-
-### Local Development
-```bash
-cd web
-python -m http.server 8000
-```
-
 ## 📊 Sample Output
 
 ```
@@ -298,10 +293,10 @@ This project is open source and available under the MIT License.
 
 ## 👤 Author
 
-**Your Name**
-- Portfolio: [Your Portfolio URL]
-- LinkedIn: [Your LinkedIn]
-- Email: [Your Email]
+**Yashas Huchchannavar**
+- GitHub: [@yvh1223](https://github.com/yvh1223)
+- LinkedIn: [Connect with me](https://linkedin.com/in/yashas-huchchannavar)
+- Portfolio: [View Projects](https://yvh1223.github.io)
 
 ## 🙏 Acknowledgments
 
