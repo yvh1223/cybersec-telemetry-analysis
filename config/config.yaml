@@ -1,0 +1,103 @@
+cybersec_telemetry_config:
+  # Data Generation Configuration
+  data_generation:
+    endpoints: 50000
+    daily_events: 15000000
+    simulation_days: 7
+    output_formats:
+      - json
+      - csv
+    
+  # Threat Detection Settings
+  threats:
+    types:
+      - malware
+      - virus
+      - trojan
+      - spyware
+      - adware
+      - ransomware
+      - rootkit
+      - worm
+      - suspicious_file
+      - phishing
+    
+    severity_levels:
+      - low
+      - medium
+      - high
+      - critical
+    
+    false_positive_rate: 0.15  # 15%
+    
+  # System Performance Metrics
+  performance:
+    cpu_thresholds:
+      normal: 15
+      warning: 25
+      critical: 40
+    
+    memory_thresholds:
+      normal: 30
+      warning: 50
+      critical: 80
+    
+    scan_duration:
+      quick: [30, 300]      # 30 seconds to 5 minutes
+      full: [1800, 7200]    # 30 minutes to 2 hours
+      scheduled: [600, 3600] # 10 minutes to 1 hour
+  
+  # AI Analysis Configuration
+  ai_analysis:
+    openai_model: "gpt-3.5-turbo"
+    max_tokens: 500
+    temperature: 0.7
+    analysis_modules:
+      - threat_patterns
+      - performance_impact
+      - user_experience
+      - executive_summary
+      - predictive_insights
+  
+  # Dashboard Settings
+  dashboard:
+    refresh_interval: 300  # seconds
+    chart_colors:
+      primary: "#667eea"
+      secondary: "#ff6b35"
+      success: "#28a745"
+      warning: "#ffc107"
+      danger: "#dc3545"
+    
+    time_ranges:
+      - 7    # Last 7 days
+      - 30   # Last 30 days
+      - 90   # Last 90 days
+  
+  # Export Settings
+  export:
+    formats:
+      - json
+      - csv
+      - pdf
+    include_charts: true
+    include_raw_data: false
+
+# Environment Settings
+environment:
+  development:
+    debug: true
+    mock_ai_responses: true
+    sample_data_size: 1000
+  
+  production:
+    debug: false
+    mock_ai_responses: false
+    sample_data_size: 50000
+
+# File Paths
+paths:
+  raw_data: "../data/raw"
+  processed_data: "../data/processed"
+  web_assets: "../web"
+  exports: "../exports"

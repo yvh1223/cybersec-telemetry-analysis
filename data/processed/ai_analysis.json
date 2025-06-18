@@ -1,0 +1,46 @@
+{
+  "threat_analysis": {
+    "summary": {
+      "total_threats": 12500,
+      "threat_types": {
+        "malware": 4500,
+        "virus": 3200,
+        "trojan": 2800,
+        "spyware": 2000
+      },
+      "false_positive_rate": 12.5
+    },
+    "ai_insights": "The threat landscape shows elevated malware activity with a concerning false positive rate of 12.5%. Immediate attention needed for signature tuning. Recommend implementing machine learning-based detection to reduce false positives while maintaining security effectiveness.",
+    "generated_at": "2025-06-17T22:23:19.808794"
+  },
+  "performance_analysis": {
+    "summary": {
+      "avg_cpu_usage": 45.2,
+      "avg_memory_usage": 32.8,
+      "avg_antivirus_impact": 18.5
+    },
+    "ai_insights": "System performance shows moderate impact from security software. CPU usage during scans peaks at unacceptable levels. Recommend implementing intelligent scheduling and resource throttling to minimize user impact during business hours.",
+    "generated_at": "2025-06-17T22:23:19.808810"
+  },
+  "user_experience_analysis": {
+    "summary": {
+      "total_feedback": 450,
+      "sentiment_distribution": {
+        "negative": 285,
+        "neutral": 120,
+        "positive": 45
+      },
+      "resolution_rate": 68.5
+    },
+    "ai_insights": "User satisfaction is critically low with 63% negative feedback. Primary complaints center on system slowdown and scan interruptions. Urgent need for UX improvements and proactive communication about security operations.",
+    "generated_at": "2025-06-17T22:23:19.808813"
+  },
+  "executive_summary": {
+    "executive_summary": "Cybersecurity telemetry analysis reveals critical areas requiring immediate attention. While threat detection is effective, high false positive rates and performance impact are significantly affecting user satisfaction. Recommend prioritizing machine learning integration and performance optimization to maintain security effectiveness while improving user experience.",
+    "generated_at": "2025-06-17T22:23:19.808815"
+  },
+  "predictive_insights": {
+    "trend_analysis": "Based on current patterns, expect 15% increase in daily events over next quarter. Capacity planning should account for peak loads during business hours. Risk forecasting indicates potential user compliance issues if performance problems persist.",
+    "generated_at": "2025-06-17T22:23:19.808816"
+  }
+}
