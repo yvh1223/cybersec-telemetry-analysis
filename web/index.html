@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Telemetry Analytics Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.6.1/d3.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1><i class="icon-shield"></i> Cybersecurity Telemetry Analytics</h1>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalEvents">Loading...</span>
+                        <span class="stat-label">Total Events</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="activeEndpoints">Loading...</span>
+                        <span class="stat-label">Active Endpoints</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="threatsDetected">Loading...</span>
+                        <span class="stat-label">Threats Detected</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="dashboard-nav">
+            <ul>
+                <li><a href="#overview" class="nav-link active" data-section="overview">Overview</a></li>
+                <li><a href="#threats" class="nav-link" data-section="threats">Threat Analysis</a></li>
+                <li><a href="#performance" class="nav-link" data-section="performance">Performance</a></li>
+                <li><a href="#insights" class="nav-link" data-section="insights">AI Insights</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <div class="section-header">
+                    <h2>Security Overview</h2>
+                    <div class="time-range">
+                        <select id="timeRange">
+                            <option value="7">Last 7 days</option>
+                            <option value="30">Last 30 days</option>
+                            <option value="90">Last 90 days</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card critical">
+                        <div class="metric-icon">⚠️</div>
+                        <div class="metric-content">
+                            <h3>Critical Issues</h3>
+                            <div class="metric-value" id="criticalIssues">0</div>
+                            <div class="metric-trend">+2% from last week</div>
+                        </div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-icon">🟡</div>
+                        <div class="metric-content">
+                            <h3>False Positives</h3>
+                            <div class="metric-value" id="falsePositives">0%</div>
+                            <div class="metric-trend">-5% improvement</div>
+                        </div>
+                    </div>
+                    <div class="metric-card success">
+                        <div class="metric-icon">✅</div>
+                        <div class="metric-content">
+                            <h3>Scan Success Rate</h3>
+                            <div class="metric-value" id="scanSuccess">0%</div>
+                            <div class="metric-trend">+1% improvement</div>
+                        </div>
+                    </div>
+                    <div class="metric-card info">
+                        <div class="metric-icon">📊</div>
+                        <div class="metric-content">
+                            <h3>Avg Response Time</h3>
+                            <div class="metric-value" id="responseTime">0ms</div>
+                            <div class="metric-trend">-10% faster</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>Daily Event Volume</h3>
+                        <canvas id="dailyEventsChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Threat Type Distribution</h3>
+                        <canvas id="threatTypesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Threat Analysis Section -->
+            <section id="threats" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Threat Analysis</h2>
+                </div>
+
+                <div class="threat-grid">
+                    <div class="threat-summary">
+                        <h3>Threat Landscape</h3>
+                        <div class="threat-stats">
+                            <div class="threat-stat">
+                                <span class="threat-number">12,458</span>
+                                <span class="threat-label">Total Threats</span>
+                            </div>
+                            <div class="threat-stat">
+                                <span class="threat-number">847</span>
+                                <span class="threat-label">Quarantined</span>
+                            </div>
+                            <div class="threat-stat">
+                                <span class="threat-number">234</span>
+                                <span class="threat-label">False Positives</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Severity Distribution</h3>
+                        <canvas id="severityChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Threat Trends (7 days)</h3>
+                        <canvas id="threatTrendsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="threat-details">
+                    <h3>Recent Threat Detections</h3>
+                    <div class="threat-table-container">
+                        <table class="threat-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Threat Type</th>
+                                    <th>Severity</th>
+                                    <th>Endpoint</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="threatTableBody">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance Section -->
+            <section id="performance" class="dashboard-section">
+                <div class="section-header">
+                    <h2>System Performance Impact</h2>
+                </div>
+
+                <div class="performance-grid">
+                    <div class="performance-card">
+                        <h3>CPU Impact</h3>
+                        <div class="performance-gauge">
+                            <canvas id="cpuGauge"></canvas>
+                        </div>
+                        <div class="performance-value">18.5%</div>
+                    </div>
+
+                    <div class="performance-card">
+                        <h3>Memory Usage</h3>
+                        <div class="performance-gauge">
+                            <canvas id="memoryGauge"></canvas>
+                        </div>
+                        <div class="performance-value">32.8%</div>
+                    </div>
+
+                    <div class="performance-card">
+                        <h3>Scan Duration</h3>
+                        <div class="performance-gauge">
+                            <canvas id="scanGauge"></canvas>
+                        </div>
+                        <div class="performance-value">45min</div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>Hourly Performance Impact</h3>
+                        <canvas id="hourlyPerformanceChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Endpoint Performance Distribution</h3>
+                        <canvas id="endpointPerformanceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Insights Section -->
+            <section id="insights" class="dashboard-section">
+                <div class="section-header">
+                    <h2>AI-Powered Insights</h2>
+                    <div class="ai-badge">Powered by OpenAI</div>
+                </div>
+
+                <div class="insights-grid">
+                    <div class="insight-card executive">
+                        <div class="insight-header">
+                            <h3>🎯 Executive Summary</h3>
+                        </div>
+                        <div class="insight-content" id="executiveSummary">
+                            Loading AI analysis...
+                        </div>
+                    </div>
+
+                    <div class="insight-card recommendations">
+                        <div class="insight-header">
+                            <h3>💡 Key Recommendations</h3>
+                        </div>
+                        <div class="insight-content">
+                            <ul id="recommendationsList">
+                                <li>Loading recommendations...</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="insight-card pain-points">
+                        <div class="insight-header">
+                            <h3>⚡ Pain Points Analysis</h3>
+                        </div>
+                        <div class="insight-content">
+                            <div id="painPointsList">
+                                Loading pain points analysis...
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-card predictions">
+                        <div class="insight-header">
+                            <h3>🔮 Predictive Insights</h3>
+                        </div>
+                        <div class="insight-content" id="predictiveInsights">
+                            Loading predictive analysis...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-items">
+                    <h3>Priority Action Items</h3>
+                    <div class="action-grid">
+                        <div class="action-item high">
+                            <div class="action-priority">HIGH</div>
+                            <div class="action-title">Reduce False Positive Rate</div>
+                            <div class="action-description">Implement ML-based threat detection to reduce false positives by 40%</div>
+                            <div class="action-timeline">Timeline: 2-3 weeks</div>
+                        </div>
+                        <div class="action-item medium">
+                            <div class="action-priority">MEDIUM</div>
+                            <div class="action-title">Optimize Scan Scheduling</div>
+                            <div class="action-description">Implement intelligent scheduling to reduce peak-hour impact</div>
+                            <div class="action-timeline">Timeline: 1-2 weeks</div>
+                        </div>
+                        <div class="action-item low">
+                            <div class="action-priority">LOW</div>
+                            <div class="action-title">Enhance User Communication</div>
+                            <div class="action-description">Improve user notifications and transparency</div>
+                            <div class="action-timeline">Timeline: 1 week</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 Cybersecurity Analytics Dashboard | Data Analysis Portfolio Project</p>
+                <div class="footer-links">
+                    <a href="#" onclick="exportData()">Export Data</a>
+                    <a href="#" onclick="refreshData()">Refresh</a>
+                    <a href="https://github.com/yourusername/cybersec-telemetry-analysis" target="_blank">View on GitHub</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Analyzing telemetry data...</div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/data-loader.js"></script>
+</body>
+</html>
