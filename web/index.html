@@ -37,6 +37,7 @@
                 <li><a href="#overview" class="nav-link active" data-section="overview">Overview</a></li>
                 <li><a href="#threats" class="nav-link" data-section="threats">Threat Analysis</a></li>
                 <li><a href="#performance" class="nav-link" data-section="performance">Performance</a></li>
+                <li><a href="#customer-experience" class="nav-link" data-section="customer-experience">Customer Experience</a></li>
                 <li><a href="#insights" class="nav-link" data-section="insights">AI Insights</a></li>
             </ul>
         </nav>
@@ -204,6 +205,181 @@
                 </div>
             </section>
 
+            <!-- Customer Experience Section -->
+            <section id="customer-experience" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Customer Experience Analytics</h2>
+                    <div class="experience-badge">User-Centric Analysis</div>
+                </div>
+
+                <!-- Customer Experience Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card success">
+                        <div class="metric-icon">😊</div>
+                        <div class="metric-content">
+                            <h3>User Satisfaction</h3>
+                            <div class="metric-value" id="userSatisfaction">72%</div>
+                            <div class="metric-trend">+8% improvement</div>
+                        </div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-icon">⏱️</div>
+                        <div class="metric-content">
+                            <h3>Avg Log Generation Time</h3>
+                            <div class="metric-value" id="logGenTime">2.3s</div>
+                            <div class="metric-trend">-0.5s faster</div>
+                        </div>
+                    </div>
+                    <div class="metric-card critical">
+                        <div class="metric-icon">🚫</div>
+                        <div class="metric-content">
+                            <h3>Workflow Interruptions</h3>
+                            <div class="metric-value" id="interruptions">142</div>
+                            <div class="metric-trend">+15% this week</div>
+                        </div>
+                    </div>
+                    <div class="metric-card info">
+                        <div class="metric-icon">📈</div>
+                        <div class="metric-content">
+                            <h3>Productivity Score</h3>
+                            <div class="metric-value" id="productivityScore">8.2</div>
+                            <div class="metric-trend">+0.3 points</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Experience Charts -->
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>User Experience Timeline</h3>
+                        <canvas id="userExperienceChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Log Generation Performance</h3>
+                        <canvas id="logPerformanceChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Experience Scenarios -->
+                <div class="scenarios-grid">
+                    <div class="scenario-card good">
+                        <div class="scenario-header">
+                            <h3>🟢 Good Experience Scenario</h3>
+                            <span class="scenario-time">Peak Hours: 9-11 AM</span>
+                        </div>
+                        <div class="scenario-metrics">
+                            <div class="scenario-metric">
+                                <span class="metric-label">Log Gen Time</span>
+                                <span class="metric-value good">1.2s</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span class="metric-label">CPU Impact</span>
+                                <span class="metric-value good">12%</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span class="metric-label">Interruptions</span>
+                                <span class="metric-value good">2/hour</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span class="metric-label">User Satisfaction</span>
+                                <span class="metric-value good">92%</span>
+                            </div>
+                        </div>
+                        <div class="scenario-factors">
+                            <h4>Contributing Factors:</h4>
+                            <ul>
+                                <li>Optimized scan scheduling</li>
+                                <li>Low network latency (15ms)</li>
+                                <li>Efficient threat database updates</li>
+                                <li>Minimal false positive alerts</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card bad">
+                        <div class="scenario-header">
+                            <h3>🔴 Poor Experience Scenario</h3>
+                            <span class="scenario-time">Peak Hours: 2-4 PM</span>
+                        </div>
+                        <div class="scenario-metrics">
+                            <div class="scenario-metric">
+                                <span class="metric-label">Log Gen Time</span>
+                                <span class="metric-value bad">4.8s</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span class="metric-label">CPU Impact</span>
+                                <span class="metric-value bad">35%</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span class="metric-label">Interruptions</span>
+                                <span class="metric-value bad">12/hour</span>
+                            </div>
+                            <div class="scenario-metric">
+                                <span class="metric-label">User Satisfaction</span>
+                                <span class="metric-value bad">31%</span>
+                            </div>
+                        </div>
+                        <div class="scenario-factors">
+                            <h4>Contributing Factors:</h4>
+                            <ul>
+                                <li>Concurrent full system scans</li>
+                                <li>High network latency (85ms)</li>
+                                <li>Large signature database updates</li>
+                                <li>Frequent false positive alerts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Improvement Recommendations -->
+                <div class="improvement-section">
+                    <h3>🎯 Customer Experience Improvement Recommendations</h3>
+                    <div class="improvements-grid">
+                        <div class="improvement-card high-impact">
+                            <div class="improvement-header">
+                                <span class="impact-badge high">High Impact</span>
+                                <h4>Intelligent Scan Scheduling</h4>
+                            </div>
+                            <div class="improvement-content">
+                                <p>Implement ML-based scheduling that learns user patterns and avoids peak productivity hours.</p>
+                                <div class="improvement-metrics">
+                                    <span class="improvement-metric">Expected UX improvement: +45%</span>
+                                    <span class="improvement-metric">Reduced interruptions: -60%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="improvement-card medium-impact">
+                            <div class="improvement-header">
+                                <span class="impact-badge medium">Medium Impact</span>
+                                <h4>Optimized Log Generation</h4>
+                            </div>
+                            <div class="improvement-content">
+                                <p>Compress and batch telemetry data to reduce generation time and network overhead.</p>
+                                <div class="improvement-metrics">
+                                    <span class="improvement-metric">Log gen time reduction: -50%</span>
+                                    <span class="improvement-metric">Network usage: -30%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="improvement-card low-impact">
+                            <div class="improvement-header">
+                                <span class="impact-badge low">Low Impact</span>
+                                <h4>Enhanced User Communication</h4>
+                            </div>
+                            <div class="improvement-content">
+                                <p>Provide transparent notifications about security operations and expected duration.</p>
+                                <div class="improvement-metrics">
+                                    <span class="improvement-metric">User understanding: +35%</span>
+                                    <span class="improvement-metric">Support tickets: -25%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- AI Insights Section -->
             <section id="insights" class="dashboard-section">
                 <div class="section-header">
@@ -282,7 +458,7 @@
         <!-- Footer -->
         <footer class="dashboard-footer">
             <div class="footer-content">
-                <p>&copy; 2025 Cybersecurity Analytics Dashboard | Data Analysis Portfolio Project</p>
+                <p>&copy; 2025 Cybersecurity Analytics Dashboard | Data Analysis Portfolio Project by <strong>Yallappa Huchchannavar</strong></p>
                 <div class="footer-links">
                     <a href="#" onclick="exportData()">Export Data</a>
                     <a href="#" onclick="refreshData()">Refresh</a>
