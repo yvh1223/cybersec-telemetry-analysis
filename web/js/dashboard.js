@@ -337,6 +337,250 @@ class CyberSecDashboard {
         });
     }
 
+    createSeverityChart() {
+        const ctx = document.getElementById('severityChart');
+        if (!ctx) return;
+
+        this.charts.severity = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Critical', 'High', 'Medium', 'Low'],
+                datasets: [{
+                    label: 'Threats',
+                    data: [234, 1847, 6234, 4143],
+                    backgroundColor: [
+                        '#dc3545',
+                        '#ff6b35',
+                        '#ffc107',
+                        '#28a745'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#b8b8b8' },
+                        grid: { color: '#444444' }
+                    },
+                    y: {
+                        ticks: { color: '#b8b8b8' },
+                        grid: { color: '#444444' }
+                    }
+                }
+            }
+        });
+    }
+
+    createThreatTrendsChart() {
+        const ctx = document.getElementById('threatTrendsChart');
+        if (!ctx) return;
+
+        const data = this.generateThreatTrendsData();
+        
+        this.charts.threatTrends = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [
+                    {
+                        label: 'Threats Detected',
+                        data: data.threats,
+                        borderColor: '#dc3545',
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        borderWidth: 2,
+                        fill: false
+                    },
+                    {
+                        label: 'False Positives',
+                        data: data.falsePositives,
+                        borderColor: '#ffc107',
+                        backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                        borderWidth: 2,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#b8b8b8' },
+                        grid: { color: '#444444' }
+                    },
+                    y: {
+                        ticks: { color: '#b8b8b8' },
+                        grid: { color: '#444444' }
+                    }
+                }
+            }
+        });
+    }
+
+    createHourlyPerformanceChart() {
+        const ctx = document.getElementById('hourlyPerformanceChart');
+        if (!ctx) return;
+
+        const data = this.generateHourlyPerformanceData();
+        
+        this.charts.hourlyPerformance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.labels,
+                datasets: [
+                    {
+                        label: 'CPU Usage %',
+                        data: data.cpu,
+                        borderColor: '#ff6b35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        borderWidth: 2,
+                        fill: true
+                    },
+                    {
+                        label: 'Memory Usage %',
+                        data: data.memory,
+                        borderColor: '#4caf50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderWidth: 2,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#b8b8b8' },
+                        grid: { color: '#444444' }
+                    },
+                    y: {
+                        ticks: { color: '#b8b8b8' },
+                        grid: { color: '#444444' }
+                    }
+                }
+            }
+        });
+    }
+
+    createEndpointPerformanceChart() {
+        const ctx = document.getElementById('endpointPerformanceChart');
+        if (!ctx) return;
+
+        this.charts.endpointPerformance = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Endpoints',
+                    data: this.generateEndpointPerformanceData(),
+                    backgroundColor: 'rgba(102, 126, 234, 0.6)',
+                    borderColor: '#667eea',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'CPU Impact %',
+                            color: '#b8b8b8'
+                        },
+                        ticks: { color: '#b8b8b8' },
+                        grid: { color: '#444444' }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Memory Usage %',
+                            color: '#b8b8b8'
+                        },
+                        ticks: { color: '#b8b8b8' },
+                        grid: { color: '#444444' }
+                    }
+                }
+            }
+        });
+    }
+
+    createPerformanceGauges() {
+        this.createGauge('cpuGauge', this.data.performance.cpuImpact, 'CPU Impact');
+        this.createGauge('memoryGauge', this.data.performance.memoryUsage, 'Memory Usage');
+        this.createGauge('scanGauge', (this.data.performance.avgScanDuration / 60), 'Scan Duration');
+    }
+
+    createGauge(canvasId, value, label) {
+        const ctx = document.getElementById(canvasId);
+        if (!ctx) return;
+
+        const maxValue = canvasId === 'scanGauge' ? 2 : 100; // 2 hours for scan duration
+        const percentage = (value / maxValue) * 100;
+        
+        this.charts[canvasId] = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [percentage, 100 - percentage],
+                    backgroundColor: [
+                        this.getGaugeColor(percentage),
+                        '#444444'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '80%',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: false
+                    }
+                }
+            }
+        });
+    }
+
+    getGaugeColor(percentage) {
+        if (percentage < 30) return '#28a745';
+        if (percentage < 60) return '#ffc107';
+        return '#dc3545';
+    }
+
     generateDailyEventsData() {
         const labels = [];
         const values = [];
@@ -349,6 +593,70 @@ class CyberSecDashboard {
         }
         
         return { labels, values };
+    }
+
+    generateThreatTrendsData() {
+        const labels = [];
+        const threats = [];
+        const falsePositives = [];
+        
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            labels.push(date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+            
+            const threatCount = Math.floor(Math.random() * 2000) + 1000;
+            threats.push(threatCount);
+            falsePositives.push(Math.floor(threatCount * (Math.random() * 0.2 + 0.05))); // 5-25% false positives
+        }
+        
+        return { labels, threats, falsePositives };
+    }
+
+    generateHourlyPerformanceData() {
+        const labels = [];
+        const cpu = [];
+        const memory = [];
+        
+        for (let hour = 0; hour < 24; hour++) {
+            labels.push(`${hour}:00`);
+            
+            // Simulate higher usage during business hours
+            const isBusinessHour = hour >= 9 && hour <= 17;
+            const baseCpu = isBusinessHour ? 35 : 15;
+            const baseMemory = isBusinessHour ? 45 : 25;
+            
+            cpu.push(baseCpu + Math.random() * 20);
+            memory.push(baseMemory + Math.random() * 15);
+        }
+        
+        return { labels, cpu, memory };
+    }
+
+    generateEndpointPerformanceData() {
+        const data = [];
+        
+        for (let i = 0; i < 50; i++) {
+            data.push({
+                x: Math.random() * 40 + 5, // CPU impact 5-45%
+                y: Math.random() * 60 + 20  // Memory usage 20-80%
+            });
+        }
+        
+        return data;
+    }
+
+    updateCharts() {
+        // Update charts based on time range selection
+        const timeRange = document.getElementById('timeRange')?.value;
+        console.log('Updating charts for time range:', timeRange);
+        
+        // Regenerate data for new time range
+        Object.keys(this.charts).forEach(chartKey => {
+            if (this.charts[chartKey]) {
+                this.charts[chartKey].update();
+            }
+        });
     }
 
     formatNumber(num) {
@@ -416,6 +724,15 @@ style.textContent = `
         padding: 0.5rem 0;
         border-bottom: 1px solid var(--border-color);
         color: var(--text-secondary);
+    }
+
+    .fade-in {
+        animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 `;
 document.head.appendChild(style);
