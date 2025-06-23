@@ -1,0 +1,648 @@
+/* Complete CSS with all telemetry grid styles */
+/* This will be appended to the existing CSS */
+
+/* Telemetry Grid Styles */
+.telemetry-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+}
+
+.control-section {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.control-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.control-item label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.control-select {
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    min-width: 140px;
+}
+
+.control-select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+}
+
+.control-button {
+    background: var(--gradient-accent);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    color: white;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.control-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.telemetry-stats {
+    display: flex;
+    gap: 1rem;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid;
+    min-width: 100px;
+    transition: transform 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: scale(1.05);
+}
+
+.stat-box.operational {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--success-color);
+    color: var(--success-color);
+}
+
+.stat-box.performance {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: var(--warning-color);
+    color: var(--warning-color);
+}
+
+.stat-box.errors {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--danger-color);
+    color: var(--danger-color);
+}
+
+.stat-box.total {
+    background: rgba(6, 182, 212, 0.1);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stat-text {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Split Panel Layout */
+.telemetry-split-panel {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    min-height: 600px;
+}
+
+.telemetry-grid-panel {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+}
+
+.grid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.grid-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.grid-header h3 i {
+    color: var(--accent-color);
+}
+
+.grid-legend {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.legend-color.operational {
+    background: var(--success-color);
+}
+
+.legend-color.performance {
+    background: var(--warning-color);
+}
+
+.legend-color.errors {
+    background: var(--danger-color);
+}
+
+/* Telemetry Grid */
+.telemetry-grid-container {
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    gap: 4px;
+    padding: 1rem;
+    background: var(--dark-bg);
+    border-radius: 8px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.grid-box {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.grid-box:hover {
+    transform: scale(1.5);
+    z-index: 10;
+    border: 1px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.grid-box.operational {
+    background: var(--success-color);
+}
+
+.grid-box.performance {
+    background: var(--warning-color);
+}
+
+.grid-box.errors {
+    background: var(--danger-color);
+}
+
+.grid-box.selected {
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.3);
+}
+
+/* Grid Labels */
+.grid-labels {
+    position: relative;
+    margin-top: 1rem;
+}
+
+.grid-label-bottom {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 4px;
+}
+
+.grid-label-left {
+    position: absolute;
+    left: -80px;
+    top: -250px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+}
+
+.label-item {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 0.5rem;
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.label-spacer {
+    flex: 1;
+}
+
+/* Details Panel */
+.telemetry-details-panel {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+}
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.details-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.details-header h3 i {
+    color: var(--accent-color);
+}
+
+.details-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.details-action {
+    background: var(--secondary-color);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    color: white;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.details-action:hover {
+    background: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.details-content {
+    flex: 1;
+    min-height: 200px;
+}
+
+.default-message {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.default-message i {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.grid-tips {
+    text-align: left;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(6, 182, 212, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.grid-tips h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.grid-tips ul {
+    list-style: none;
+    padding: 0;
+}
+
+.grid-tips li {
+    padding: 0.25rem 0;
+    font-size: 0.875rem;
+}
+
+.endpoint-details {
+    padding: 1rem;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.detail-value {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.operational {
+    background: var(--success-color);
+    color: white;
+}
+
+.status-badge.performance {
+    background: var(--warning-color);
+    color: white;
+}
+
+.status-badge.errors {
+    background: var(--danger-color);
+    color: white;
+}
+
+/* Mini Charts */
+.details-charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.mini-chart-container {
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.mini-chart-container h4 {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mini-chart-container h4 i {
+    color: var(--accent-color);
+}
+
+/* Activity Feed */
+.activity-feed-section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+}
+
+.activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.activity-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.activity-header h3 i {
+    color: var(--accent-color);
+}
+
+.activity-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.activity-control {
+    background: var(--secondary-color);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    color: white;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.activity-control:hover {
+    background: var(--primary-color);
+}
+
+.activity-feed {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid;
+    transition: all 0.3s ease;
+    animation: slideInRight 0.3s ease;
+}
+
+.activity-item:hover {
+    background: rgba(30, 41, 59, 0.6);
+    transform: translateX(5px);
+}
+
+.activity-item.operational {
+    border-left-color: var(--success-color);
+}
+
+.activity-item.performance {
+    border-left-color: var(--warning-color);
+}
+
+.activity-item.errors {
+    border-left-color: var(--danger-color);
+}
+
+.activity-icon {
+    font-size: 1.25rem;
+    width: 24px;
+    text-align: center;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.activity-description {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.activity-time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Tooltip */
+.grid-tooltip {
+    position: absolute;
+    background: var(--dark-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    z-index: 1000;
+    pointer-events: none;
+    max-width: 250px;
+    box-shadow: var(--shadow-hover);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+}
+
+.grid-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tooltip-header {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.tooltip-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.tooltip-label {
+    color: var(--text-secondary);
+}
+
+.tooltip-value {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Scrollbar styles */
+.activity-feed::-webkit-scrollbar {
+    width: 6px;
+}
+
+.activity-feed::-webkit-scrollbar-track {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.activity-feed::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 3px;
+}
+
+.activity-feed::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
