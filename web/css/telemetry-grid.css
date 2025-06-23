@@ -441,6 +441,12 @@
     background: rgba(30, 41, 59, 0.5);
     border-radius: 8px;
     padding: 1rem;
+    height: 200px;
+}
+
+.mini-chart-container canvas {
+    max-height: 150px !important;
+    height: 150px !important;
 }
 
 .mini-chart-container h4 {

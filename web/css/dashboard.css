@@ -219,7 +219,23 @@ body {
     border: 1px solid var(--border-color);
 }
 
-.chart-container canvas { max-height: 300px; }
+.chart-container canvas { max-height: 300px; height: 300px; }
+
+/* Chart specific fixes */
+.analysis-card canvas,
+.perf-card canvas,
+.insight-card canvas {
+    max-height: 250px !important;
+    height: 250px !important;
+}
+
+.threat-breakdown canvas,
+.detection-trends canvas,
+.device-performance canvas,
+.predictive-analytics canvas {
+    max-height: 250px !important;
+    height: 250px !important;
+}
 
 /* Severity & Threats */
 .severity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
