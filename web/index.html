@@ -40,3 +40,585 @@
                 </div>
             </div>
         </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="dashboard-nav">
+            <div class="nav-tabs">
+                <button class="tab-button active" data-tab="overview">
+                    <i class="fas fa-tachometer-alt"></i> Overview
+                </button>
+                <button class="tab-button" data-tab="threats">
+                    <i class="fas fa-exclamation-triangle"></i> Threat Analysis
+                </button>
+                <button class="tab-button" data-tab="performance">
+                    <i class="fas fa-chart-line"></i> Performance
+                </button>
+                <button class="tab-button" data-tab="ai-insights">
+                    <i class="fas fa-brain"></i> AI Insights
+                </button>
+                <button class="tab-button" data-tab="telemetry-grid">
+                    <i class="fas fa-th-large"></i> Telemetry Grid
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="tab-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Enterprise Security Overview</h2>
+                    <p>Real-time cybersecurity telemetry analytics from mobile and desktop devices</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card threat-summary">
+                        <div class="metric-header">
+                            <h3><i class="fas fa-shield-virus"></i> Threat Summary</h3>
+                        </div>
+                        <div class="metric-content">
+                            <div class="large-metric">
+                                <span class="metric-value" id="detectionRate">3.1%</span>
+                                <span class="metric-label">Detection Rate</span>
+                            </div>
+                            <div class="sub-metrics">
+                                <div class="sub-metric">
+                                    <span id="malwareDetected">6,290</span>
+                                    <span>Malware</span>
+                                </div>
+                                <div class="sub-metric">
+                                    <span id="pupDetected">5,030</span>
+                                    <span>PUPs</span>
+                                </div>
+                                <div class="sub-metric">
+                                    <span id="trojanDetected">2,695</span>
+                                    <span>Trojans</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card scan-performance">
+                        <div class="metric-header">
+                            <h3><i class="fas fa-stopwatch"></i> Scan Performance</h3>
+                        </div>
+                        <div class="metric-content">
+                            <div class="large-metric">
+                                <span class="metric-value" id="avgScanTime">8.4</span>
+                                <span class="metric-label">Avg Duration (min)</span>
+                            </div>
+                            <div class="performance-indicator">
+                                <div class="indicator-bar">
+                                    <div class="indicator-fill" id="performanceBar" style="width: 75%;"></div>
+                                </div>
+                                <span class="indicator-text">Good Performance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card device-health">
+                        <div class="metric-header">
+                            <h3><i class="fas fa-laptop-medical"></i> Device Health</h3>
+                        </div>
+                        <div class="metric-content">
+                            <div class="health-grid">
+                                <div class="health-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>Mobile</span>
+                                    <span id="mobileHealth">94%</span>
+                                </div>
+                                <div class="health-item">
+                                    <i class="fas fa-desktop"></i>
+                                    <span>Desktop</span>
+                                    <span id="desktopHealth">97%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card regional-threats">
+                        <div class="metric-header">
+                            <h3><i class="fas fa-globe-americas"></i> Regional Threats</h3>
+                        </div>
+                        <div class="metric-content">
+                            <canvas id="regionalChart" width="300" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-section">
+                    <div class="chart-container">
+                        <h3><i class="fas fa-chart-area"></i> Threat Timeline (Last 30 Days)</h3>
+                        <canvas id="threatTimelineChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3><i class="fas fa-clock"></i> Hourly Scan Distribution</h3>
+                        <canvas id="hourlyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Threat Analysis Tab -->
+            <div id="threats" class="tab-content">
+                <div class="tab-header">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Advanced Threat Analysis</h2>
+                    <p>Deep dive into threat patterns and security incidents</p>
+                </div>
+
+                <div class="threat-analysis-grid">
+                    <div class="analysis-card threat-breakdown">
+                        <h3><i class="fas fa-pie-chart"></i> Threat Type Distribution</h3>
+                        <canvas id="threatTypesChart"></canvas>
+                    </div>
+
+                    <div class="analysis-card severity-matrix">
+                        <h3><i class="fas fa-exclamation-circle"></i> Risk Severity Matrix</h3>
+                        <div class="severity-grid">
+                            <div class="severity-item critical">
+                                <span class="severity-count">287</span>
+                                <span class="severity-label">Critical</span>
+                            </div>
+                            <div class="severity-item high">
+                                <span class="severity-count">834</span>
+                                <span class="severity-label">High</span>
+                            </div>
+                            <div class="severity-item medium">
+                                <span class="severity-count">1,456</span>
+                                <span class="severity-label">Medium</span>
+                            </div>
+                            <div class="severity-item low">
+                                <span class="severity-count">1,017</span>
+                                <span class="severity-label">Low</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analysis-card detection-trends">
+                        <h3><i class="fas fa-chart-line"></i> Detection Trends</h3>
+                        <canvas id="detectionTrendsChart"></canvas>
+                    </div>
+
+                    <div class="analysis-card geographic-threats">
+                        <h3><i class="fas fa-map-marked-alt"></i> Geographic Threat Distribution</h3>
+                        <div class="geo-list">
+                            <div class="geo-item">
+                                <span class="region">North America</span>
+                                <div class="threat-bar">
+                                    <div class="threat-fill" style="width: 45%;"></div>
+                                </div>
+                                <span class="threat-count">1,617</span>
+                            </div>
+                            <div class="geo-item">
+                                <span class="region">Europe</span>
+                                <div class="threat-bar">
+                                    <div class="threat-fill" style="width: 30%;"></div>
+                                </div>
+                                <span class="threat-count">1,078</span>
+                            </div>
+                            <div class="geo-item">
+                                <span class="region">Asia Pacific</span>
+                                <div class="threat-bar">
+                                    <div class="threat-fill" style="width: 20%;"></div>
+                                </div>
+                                <span class="threat-count">719</span>
+                            </div>
+                            <div class="geo-item">
+                                <span class="region">Latin America</span>
+                                <div class="threat-bar">
+                                    <div class="threat-fill" style="width: 5%;"></div>
+                                </div>
+                                <span class="threat-count">180</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Tab -->
+            <div id="performance" class="tab-content">
+                <div class="tab-header">
+                    <h2><i class="fas fa-chart-line"></i> Performance Analytics</h2>
+                    <p>System performance metrics and optimization opportunities</p>
+                </div>
+
+                <div class="performance-grid">
+                    <div class="perf-card resource-usage">
+                        <h3><i class="fas fa-microchip"></i> Resource Utilization</h3>
+                        <canvas id="resourceChart"></canvas>
+                    </div>
+
+                    <div class="perf-card scan-efficiency">
+                        <h3><i class="fas fa-gauge-high"></i> Scan Efficiency</h3>
+                        <div class="efficiency-metrics">
+                            <div class="efficiency-item">
+                                <span class="efficiency-label">Quick Scans</span>
+                                <div class="efficiency-bar">
+                                    <div class="efficiency-fill" style="width: 85%;"></div>
+                                </div>
+                                <span class="efficiency-value">85%</span>
+                            </div>
+                            <div class="efficiency-item">
+                                <span class="efficiency-label">Full Scans</span>
+                                <div class="efficiency-bar">
+                                    <div class="efficiency-fill" style="width: 72%;"></div>
+                                </div>
+                                <span class="efficiency-value">72%</span>
+                            </div>
+                            <div class="efficiency-item">
+                                <span class="efficiency-label">Custom Scans</span>
+                                <div class="efficiency-bar">
+                                    <div class="efficiency-fill" style="width: 79%;"></div>
+                                </div>
+                                <span class="efficiency-value">79%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="perf-card pain-points">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Customer Pain Points</h3>
+                        <div class="pain-points-list">
+                            <div class="pain-point-item high">
+                                <i class="fas fa-microchip"></i>
+                                <span class="pain-title">High CPU Impact</span>
+                                <span class="pain-percentage">32%</span>
+                            </div>
+                            <div class="pain-point-item high">
+                                <i class="fas fa-battery-quarter"></i>
+                                <span class="pain-title">Battery Drain</span>
+                                <span class="pain-percentage">18%</span>
+                            </div>
+                            <div class="pain-point-item medium">
+                                <i class="fas fa-times-circle"></i>
+                                <span class="pain-title">Scan Failures</span>
+                                <span class="pain-percentage">8%</span>
+                            </div>
+                            <div class="pain-point-item medium">
+                                <i class="fas fa-clock"></i>
+                                <span class="pain-title">Business Hour Disruption</span>
+                                <span class="pain-percentage">15%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="perf-card device-performance">
+                        <h3><i class="fas fa-chart-bar"></i> Performance by Device Type</h3>
+                        <canvas id="devicePerformanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Insights Tab -->
+            <div id="ai-insights" class="tab-content">
+                <div class="tab-header">
+                    <h2><i class="fas fa-brain"></i> AI-Powered Security Insights</h2>
+                    <p>Advanced analytics and predictive recommendations powered by machine learning</p>
+                </div>
+
+                <div class="ai-insights-grid">
+                    <div class="insight-card threat-intelligence">
+                        <h3><i class="fas fa-search"></i> Threat Intelligence Analysis</h3>
+                        <div class="insight-content">
+                            <div class="insight-summary">
+                                <p><strong>AI Assessment:</strong> Analysis of 520,000 daily logs reveals emerging threat patterns with 92% confidence level.</p>
+                            </div>
+                            <div class="key-findings">
+                                <div class="finding-item">
+                                    <i class="fas fa-arrow-trend-up trend-up"></i>
+                                    <span>23% increase in Trojan detections during business hours</span>
+                                </div>
+                                <div class="finding-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>Mobile devices show 32% higher PUP vulnerability</span>
+                                </div>
+                                <div class="finding-item">
+                                    <i class="fas fa-globe"></i>
+                                    <span>Regional threat concentration: NA (45%), EU (30%)</span>
+                                </div>
+                            </div>
+                            <div class="prediction-box">
+                                <h4><i class="fas fa-crystal-ball"></i> 6-Month Forecast</h4>
+                                <ul>
+                                    <li>18% increase in targeted ransomware attacks</li>
+                                    <li>25% growth in mobile-first attack vectors</li>
+                                    <li>Zero-day exploits targeting endpoint gaps</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-card optimization-recommendations">
+                        <h3><i class="fas fa-cogs"></i> Performance Optimization</h3>
+                        <div class="insight-content">
+                            <div class="optimization-list">
+                                <div class="optimization-item priority-high">
+                                    <div class="opt-header">
+                                        <span class="opt-title">Intelligent Scheduling</span>
+                                        <span class="opt-priority high">High Priority</span>
+                                    </div>
+                                    <p>AI-driven scan scheduling to avoid peak usage hours</p>
+                                    <div class="opt-impact">
+                                        <span>Expected Impact: 50% reduction in productivity interruptions</span>
+                                    </div>
+                                </div>
+                                <div class="optimization-item priority-high">
+                                    <div class="opt-header">
+                                        <span class="opt-title">Battery-Aware Scanning</span>
+                                        <span class="opt-priority high">High Priority</span>
+                                    </div>
+                                    <p>Reduce scan intensity when battery < 30%</p>
+                                    <div class="opt-impact">
+                                        <span>Expected Impact: 40% reduction in battery complaints</span>
+                                    </div>
+                                </div>
+                                <div class="optimization-item priority-medium">
+                                    <div class="opt-header">
+                                        <span class="opt-title">ML-Enhanced Detection</span>
+                                        <span class="opt-priority medium">Medium Priority</span>
+                                    </div>
+                                    <p>Deploy machine learning for context-aware threat detection</p>
+                                    <div class="opt-impact">
+                                        <span>Expected Impact: 30% reduction in false positives</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-card predictive-analytics">
+                        <h3><i class="fas fa-chart-line"></i> Predictive Analytics</h3>
+                        <div class="insight-content">
+                            <canvas id="predictiveChart"></canvas>
+                            <div class="prediction-metrics">
+                                <div class="pred-metric">
+                                    <span class="pred-value">92%</span>
+                                    <span class="pred-label">Implementation Confidence</span>
+                                </div>
+                                <div class="pred-metric">
+                                    <span class="pred-value">$4.2M</span>
+                                    <span class="pred-label">Annual Savings Potential</span>
+                                </div>
+                                <div class="pred-metric">
+                                    <span class="pred-value">5.2</span>
+                                    <span class="pred-label">Months to Break-even</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-card roi-analysis">
+                        <h3><i class="fas fa-dollar-sign"></i> ROI & Business Impact</h3>
+                        <div class="insight-content">
+                            <div class="roi-summary">
+                                <div class="roi-item">
+                                    <h4>Investment Required</h4>
+                                    <span class="roi-value">$1.8M</span>
+                                </div>
+                                <div class="roi-item">
+                                    <h4>3-Year ROI</h4>
+                                    <span class="roi-value success">340%</span>
+                                </div>
+                            </div>
+                            <div class="impact-timeline">
+                                <h4>Implementation Timeline & Impact</h4>
+                                <div class="timeline-item">
+                                    <span class="timeline-phase">Phase 1 (0-3 months)</span>
+                                    <span class="timeline-impact">25% reduction in performance complaints</span>
+                                </div>
+                                <div class="timeline-item">
+                                    <span class="timeline-phase">Phase 2 (3-6 months)</span>
+                                    <span class="timeline-impact">40% improvement in scan efficiency</span>
+                                </div>
+                                <div class="timeline-item">
+                                    <span class="timeline-phase">Phase 3 (6-12 months)</span>
+                                    <span class="timeline-impact">50% reduction in support tickets</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Telemetry Grid Tab -->
+            <div id="telemetry-grid" class="tab-content">
+                <div class="tab-header">
+                    <h2><i class="fas fa-th-large"></i> Enterprise Telemetry Grid</h2>
+                    <p>Real-time telemetry monitoring with 500,000+ logs/day from 100,000 endpoints - Interactive grid visualization</p>
+                </div>
+
+                <!-- Telemetry Control Panel -->
+                <div class="telemetry-controls">
+                    <div class="control-section">
+                        <div class="control-item">
+                            <label for="regionFilter">Region:</label>
+                            <select id="regionFilter" class="control-select">
+                                <option value="all">All Regions</option>
+                                <option value="north-america">North America</option>
+                                <option value="europe">Europe</option>
+                                <option value="asia-pacific">Asia Pacific</option>
+                                <option value="latin-america">Latin America</option>
+                            </select>
+                        </div>
+                        <div class="control-item">
+                            <label for="deviceFilter">Device Type:</label>
+                            <select id="deviceFilter" class="control-select">
+                                <option value="all">All Devices</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="desktop">Desktop</option>
+                            </select>
+                        </div>
+                        <div class="control-item">
+                            <label for="statusFilter">Status:</label>
+                            <select id="statusFilter" class="control-select">
+                                <option value="all">All Status</option>
+                                <option value="operational">Operational</option>
+                                <option value="performance-issues">Performance Issues</option>
+                                <option value="errors">Errors/Problems</option>
+                            </select>
+                        </div>
+                        <div class="control-item">
+                            <button id="refreshGrid" class="control-button">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                        <div class="control-item">
+                            <button id="exportData" class="control-button">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    <div class="telemetry-stats">
+                        <div class="stat-box operational">
+                            <span class="stat-number" id="operationalCount">84,560</span>
+                            <span class="stat-text">Operational</span>
+                        </div>
+                        <div class="stat-box performance">
+                            <span class="stat-number" id="performanceCount">12,340</span>
+                            <span class="stat-text">Performance Issues</span>
+                        </div>
+                        <div class="stat-box errors">
+                            <span class="stat-number" id="errorCount">3,100</span>
+                            <span class="stat-text">Errors/Problems</span>
+                        </div>
+                        <div class="stat-box total">
+                            <span class="stat-number" id="totalEndpoints">100,000</span>
+                            <span class="stat-text">Total Endpoints</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Split Panel Layout -->
+                <div class="telemetry-split-panel">
+                    <!-- Left Panel: Interactive Grid -->
+                    <div class="telemetry-grid-panel">
+                        <div class="grid-header">
+                            <h3><i class="fas fa-network-wired"></i> Endpoint Status Grid</h3>
+                            <div class="grid-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color operational"></div>
+                                    <span>Operational</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color performance"></div>
+                                    <span>Performance Issues</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color errors"></div>
+                                    <span>Errors/Problems</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="telemetry-grid-container" id="telemetryGridContainer">
+                            <!-- Grid boxes will be generated dynamically -->
+                        </div>
+                        <div class="grid-labels">
+                            <div class="grid-label-bottom">
+                                <span>Endpoint Regions: NA (1-5000) | EU (5001-10000) | APAC (10001-15000) | LATAM (15001-20000)</span>
+                            </div>
+                            <div class="grid-label-left">
+                                <div class="label-item">Desktop Devices</div>
+                                <div class="label-spacer"></div>
+                                <div class="label-item">Mobile Devices</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Details -->
+                    <div class="telemetry-details-panel">
+                        <div class="details-header">
+                            <h3><i class="fas fa-info-circle"></i> Endpoint Details</h3>
+                            <div class="details-actions">
+                                <button class="details-action" id="viewLogs">
+                                    <i class="fas fa-file-alt"></i> View Logs
+                                </button>
+                                <button class="details-action" id="runDiagnostic">
+                                    <i class="fas fa-stethoscope"></i> Diagnostic
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="details-content" id="detailsContent">
+                            <div class="default-message">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <p>Click on any grid box to view detailed telemetry information</p>
+                                <div class="grid-tips">
+                                    <h4>Quick Actions:</h4>
+                                    <ul>
+                                        <li><strong>Hover:</strong> Quick status preview</li>
+                                        <li><strong>Click:</strong> Detailed endpoint analysis</li>
+                                        <li><strong>Double-click:</strong> Open full diagnostic view</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Real-time Chart Section -->
+                        <div class="details-charts">
+                            <div class="mini-chart-container">
+                                <h4><i class="fas fa-chart-line"></i> Real-time Performance</h4>
+                                <canvas id="realtimeChart" width="300" height="150"></canvas>
+                            </div>
+                            <div class="mini-chart-container">
+                                <h4><i class="fas fa-chart-bar"></i> Issue Distribution</h4>
+                                <canvas id="issueDistributionChart" width="300" height="150"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Activity Feed -->
+                <div class="activity-feed-section">
+                    <div class="activity-header">
+                        <h3><i class="fas fa-stream"></i> Live Telemetry Activity</h3>
+                        <div class="activity-controls">
+                            <button id="pauseActivity" class="activity-control">
+                                <i class="fas fa-pause"></i> Pause
+                            </button>
+                            <button id="clearActivity" class="activity-control">
+                                <i class="fas fa-trash"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                    <div class="activity-feed" id="activityFeed">
+                        <!-- Live activity items will be added here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <p>&copy; 2024 Cybersecurity Telemetry Analytics Dashboard</p>
+                </div>
+                <div class="footer-section">
+                    <p>Built for McAfee Technical Interview</p>
+                    <p>Technologies: Python, OpenAI API, Chart.js, HTML5/CSS3</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
