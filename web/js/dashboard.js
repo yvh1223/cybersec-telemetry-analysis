@@ -264,6 +264,10 @@ class CybersecurityDashboard {
         const ctx = document.getElementById('threatTypesChart');
         if (!ctx) return;
 
+        if (this.charts.threatTypes) {
+            this.charts.threatTypes.destroy();
+        }
+
         const types = Object.keys(this.data.threats.byType);
         const values = Object.values(this.data.threats.byType);
 
@@ -280,7 +284,7 @@ class CybersecurityDashboard {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 plugins: {
                     legend: { position: 'right', labels: { color: '#cbd5e1' } }
                 }
@@ -292,6 +296,10 @@ class CybersecurityDashboard {
         const ctx = document.getElementById('detectionTrendsChart');
         if (!ctx) return;
 
+        if (this.charts.detectionTrends) {
+            this.charts.detectionTrends.destroy();
+        }
+
         this.charts.detectionTrends = new Chart(ctx, {
             type: 'line',
             data: {
@@ -299,14 +307,14 @@ class CybersecurityDashboard {
                 datasets: [
                     {
                         label: 'Malware',
-                        data: [45, 52, 48, 61],
+                        data: [2250, 2600, 2400, 3050],
                         borderColor: '#ef4444',
                         backgroundColor: 'rgba(239, 68, 68, 0.1)',
                         tension: 0.4
                     },
                     {
                         label: 'PUP',
-                        data: [38, 42, 35, 45],
+                        data: [1900, 2100, 1750, 2250],
                         borderColor: '#f59e0b',
                         backgroundColor: 'rgba(245, 158, 11, 0.1)',
                         tension: 0.4
@@ -315,7 +323,7 @@ class CybersecurityDashboard {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 plugins: { legend: { position: 'top', labels: { color: '#cbd5e1' } } },
                 scales: {
                     y: { beginAtZero: true, grid: { color: '#334155' }, ticks: { color: '#cbd5e1' } },
@@ -370,10 +378,14 @@ class CybersecurityDashboard {
         const ctx = document.getElementById('devicePerformanceChart');
         if (!ctx) return;
 
+        if (this.charts.devicePerformance) {
+            this.charts.devicePerformance.destroy();
+        }
+
         this.charts.devicePerformance = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Mobile', 'Desktop'],
+                labels: ['Mobile (60,000)', 'Desktop (40,000)'],
                 datasets: [{
                     label: 'Avg Scan Duration (min)',
                     data: [
@@ -387,7 +399,7 @@ class CybersecurityDashboard {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 plugins: { legend: { display: false } },
                 scales: {
                     y: { beginAtZero: true, grid: { color: '#334155' }, ticks: { color: '#cbd5e1' } },
@@ -401,22 +413,26 @@ class CybersecurityDashboard {
         const ctx = document.getElementById('predictiveChart');
         if (!ctx) return;
 
+        if (this.charts.predictive) {
+            this.charts.predictive.destroy();
+        }
+
         this.charts.predictive = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                 datasets: [
                     {
-                        label: 'Actual Performance',
-                        data: [75, 78, 82, 79, 85, 88],
+                        label: 'Current Performance',
+                        data: [75000, 78000, 82000, 79000, 85000, 88000],
                         borderColor: '#10b981',
                         backgroundColor: 'rgba(16, 185, 129, 0.1)',
                         borderWidth: 2,
                         tension: 0.4
                     },
                     {
-                        label: 'Predicted with AI',
-                        data: [88, 92, 95, 98, 102, 105],
+                        label: 'AI-Enhanced Prediction',
+                        data: [88000, 92000, 95000, 98000, 102000, 105000],
                         borderColor: '#06b6d4',
                         backgroundColor: 'rgba(6, 182, 212, 0.1)',
                         borderWidth: 2,
@@ -427,7 +443,7 @@ class CybersecurityDashboard {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 plugins: { legend: { position: 'top', labels: { color: '#cbd5e1' } } },
                 scales: {
                     y: { beginAtZero: true, grid: { color: '#334155' }, ticks: { color: '#cbd5e1' } },
@@ -842,8 +858,8 @@ class TelemetryGridManager {
             time.setMinutes(time.getMinutes() - i * 5);
             timeLabels.push(time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
             
-            cpuData.push(endpoint.cpuUsage + (Math.random() - 0.5) * 20);
-            memoryData.push(endpoint.memoryUsage + (Math.random() - 0.5) * 15);
+            cpuData.push(Math.max(0, Math.min(100, endpoint.cpuUsage + (Math.random() - 0.5) * 20)));
+            memoryData.push(Math.max(0, Math.min(100, endpoint.memoryUsage + (Math.random() - 0.5) * 15)));
         }
         
         this.realtimeChart = new Chart(ctx, {
@@ -873,7 +889,7 @@ class TelemetryGridManager {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 plugins: {
                     legend: {
                         position: 'top',
@@ -920,7 +936,7 @@ class TelemetryGridManager {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 plugins: {
                     legend: {
                         position: 'bottom',
@@ -1115,7 +1131,85 @@ class TelemetryGridManager {
     // Initialize the grid when the tab becomes active
     initializeGrid() {
         this.renderGrid();
-        this.updateDetailCharts();
+        this.createDefaultCharts();
+    }
+
+    createDefaultCharts() {
+        // Create default charts when no endpoint is selected
+        this.createDefaultRealtimeChart();
+        this.createIssueDistributionChart();
+    }
+
+    createDefaultRealtimeChart() {
+        const ctx = document.getElementById('realtimeChart');
+        if (!ctx) return;
+        
+        if (this.realtimeChart) {
+            this.realtimeChart.destroy();
+        }
+        
+        // Generate sample data for visualization
+        const timeLabels = [];
+        const cpuData = [];
+        const memoryData = [];
+        
+        for (let i = 11; i >= 0; i--) {
+            const time = new Date();
+            time.setMinutes(time.getMinutes() - i * 5);
+            timeLabels.push(time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }));
+            
+            cpuData.push(Math.floor(Math.random() * 60) + 20);
+            memoryData.push(Math.floor(Math.random() * 50) + 30);
+        }
+        
+        this.realtimeChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timeLabels,
+                datasets: [
+                    {
+                        label: 'Avg CPU %',
+                        data: cpuData,
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: false
+                    },
+                    {
+                        label: 'Avg Memory %',
+                        data: memoryData,
+                        borderColor: '#06b6d4',
+                        backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#cbd5e1', font: { size: 10 } }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { color: '#334155' },
+                        ticks: { color: '#cbd5e1', font: { size: 10 } }
+                    },
+                    x: {
+                        grid: { color: '#334155' },
+                        ticks: { color: '#cbd5e1', font: { size: 10 } }
+                    }
+                }
+            }
+        });
     }
 }
 
